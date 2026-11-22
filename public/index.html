@@ -102,6 +102,10 @@
     .record dt{color:#aebbb0}.record dd{margin:0;text-align:right;color:#f2eee0}
     .record-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;font-size:12px}
     .record-links a{color:#ead47e}
+    .record-feature{display:grid;grid-template-columns:minmax(180px,.72fr) minmax(0,1.28fr);gap:clamp(20px,4vw,44px);align-items:center;padding:clamp(18px,4vw,32px)}
+    .record-photo{width:100%;max-width:280px;margin:0 auto}
+    .record-photo img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 20%;border:2px solid #d5bd68;border-radius:6px}
+    .record-copy h2{margin-top:5px;font-size:clamp(30px,4vw,44px);line-height:1}
     .visual-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
     .visual-card{overflow:hidden;border:1px solid var(--line);border-radius:8px;background:var(--panel)}
     .visual-card .art{height:170px;background:linear-gradient(135deg,#10251a,#173627)}
@@ -159,8 +163,8 @@
     .footer{padding:24px 0 30px;border-top:1px solid var(--line);color:#aab5ac;font-size:13px}
     .nexa-sign{display:flex;justify-content:space-between;gap:12px;margin-top:18px;padding-top:13px;border-top:1px solid var(--line);font-size:11px;letter-spacing:.04em}
     .nexa-sign b{color:#f0d26a}
-    @media(max-width:850px){.hero-in{grid-template-columns:106px minmax(0,1fr) 180px;gap:16px}.state-map{width:104px}.portrait img{height:235px}.conversation{grid-template-columns:1fr}.side-stack{grid-template-columns:1fr 1fr}.visual-grid{grid-template-columns:1fr 1fr}.video-layout{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:620px){.wrap{width:min(100% - 26px,1160px)}.nav-in{min-height:66px}.brand b{font-size:18px}.brand-map{width:47px;height:47px}nav{gap:12px}nav a:not(.cta){display:none}.nav .cta{font-size:12px;padding:8px 10px}.hero-in{grid-template-columns:49px minmax(0,1fr) 88px;gap:8px;min-height:300px;padding-block:25px}.state-map{width:49px}.portrait{width:100%}.portrait img{height:136px;box-shadow:5px 5px 0 var(--blue)}.hero .eyebrow{font-size:9px;letter-spacing:.06em}h1{font-size:clamp(22px,6.5vw,36px)}.hero-copy p{font-size:13px;margin-top:10px}.hero-actions{gap:7px;margin-top:12px}.button{min-height:38px;padding:8px 10px;font-size:12px}.section{padding-block:40px}.section-head{display:block}.section-head p{margin-top:10px}.feed{height:330px;padding:12px}.message{max-width:96%}.side-stack{grid-template-columns:1fr}.visual-grid{grid-template-columns:1fr}.visual-card .art{height:150px}.video-row{grid-template-columns:1fr}.inbox{font-size:11px}.inbox th,.inbox td{padding:7px}.compose{padding-inline:11px}.ribbon-set{min-height:36px;font-size:11px}.dash-head{align-items:flex-start;flex-direction:column}.dash-columns,.map-layout{grid-template-columns:1fr}.map-shell{height:260px}.media-list{grid-template-columns:1fr}.nexa-sign{flex-direction:column}}
+    @media(max-width:850px){.hero-in{grid-template-columns:106px minmax(0,1fr) 180px;gap:16px}.state-map{width:104px}.portrait img{height:235px}.conversation{grid-template-columns:1fr}.side-stack{grid-template-columns:1fr}.visual-grid{grid-template-columns:1fr 1fr}.video-layout{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:620px){.wrap{width:min(100% - 26px,1160px)}.nav-in{min-height:66px}.brand b{font-size:18px}.brand-map{width:47px;height:47px}nav{gap:12px}nav a:not(.cta){display:none}.nav .cta{font-size:12px;padding:8px 10px}.hero-in{grid-template-columns:49px minmax(0,1fr) 88px;gap:8px;min-height:300px;padding-block:25px}.state-map{width:49px}.portrait{width:100%}.portrait img{height:136px;box-shadow:5px 5px 0 var(--blue)}.hero .eyebrow{font-size:9px;letter-spacing:.06em}h1{font-size:clamp(22px,6.5vw,36px)}.hero-copy p{font-size:13px;margin-top:10px}.hero-actions{gap:7px;margin-top:12px}.button{min-height:38px;padding:8px 10px;font-size:12px}.section{padding-block:40px}.section-head{display:block}.section-head p{margin-top:10px}.feed{height:330px;padding:12px}.message{max-width:96%}.side-stack{grid-template-columns:1fr}.record-feature{grid-template-columns:1fr}.record-photo{max-width:220px}.visual-grid{grid-template-columns:1fr}.visual-card .art{height:150px}.video-row{grid-template-columns:1fr}.inbox{font-size:11px}.inbox th,.inbox td{padding:7px}.compose{padding-inline:11px}.ribbon-set{min-height:36px;font-size:11px}.dash-head{align-items:flex-start;flex-direction:column}.dash-columns,.map-layout{grid-template-columns:1fr}.map-shell{height:260px}.media-list{grid-template-columns:1fr}.nexa-sign{flex-direction:column}}
     @media(max-width:360px){.hero-in{grid-template-columns:40px minmax(0,1fr) 70px;gap:6px}.state-map{width:40px}.portrait img{height:112px}h1{font-size:clamp(20px,6.2vw,24px)}}
     html[data-theme="light"]{color-scheme:light;--bg:#f3f6f2;--panel:#fff;--panel2:#edf2ed;--line:#d5dfd6;--text:#1c2a21;--muted:#627167}
     html[data-theme="light"] body{background:var(--bg);color:var(--text)}
@@ -252,13 +256,13 @@
         <span class="rainbow-mark" aria-hidden="true">RC</span><strong>Rainbow Coalition</strong><span class="dot">◆</span>
         <span>Vote Rt. Hon. Dumle Maol</span><span class="dot">◆</span><span>Gokana Constituency</span><span class="dot">◆</span>
         <span>Vote wisely</span><span class="dot">◆</span><span>Protect your vote</span><span class="dot">◆</span><span>A new Rivers is possible</span><span class="dot">◆</span>
-        <span>Collect your PVC</span><span class="dot">◆</span><span>A Rivers State for all Rivers people</span><span class="dot">◆</span><span>Renew Hope</span><span class="dot">◆</span><span>A Better Rivers State</span><span class="dot">◆</span><img class="ticker-apc" src="assets/apc-logo.webp" alt="APC">
+        <span>Collect your PVC</span><span class="dot">◆</span><span>A Rivers State for all Rivers people</span><span class="dot">◆</span><span>Renewed Hope</span><span class="dot">◆</span><span>A Better Rivers State</span><span class="dot">◆</span><img class="ticker-apc" src="assets/apc-logo.webp" alt="APC">
       </div>
       <div class="ribbon-set" aria-hidden="true">
         <span class="rainbow-mark">RC</span><strong>Rainbow Coalition</strong><span class="dot">◆</span>
         <span>Vote Rt. Hon. Dumle Maol</span><span class="dot">◆</span><span>Gokana Constituency</span><span class="dot">◆</span>
         <span>Vote wisely</span><span class="dot">◆</span><span>Protect your vote</span><span class="dot">◆</span><span>A new Rivers is possible</span><span class="dot">◆</span>
-        <span>Collect your PVC</span><span class="dot">◆</span><span>A Rivers State for all Rivers people</span><span class="dot">◆</span><span>Renew Hope</span><span class="dot">◆</span><span>A Better Rivers State</span><span class="dot">◆</span><img class="ticker-apc" src="assets/apc-logo.webp" alt="">
+        <span>Collect your PVC</span><span class="dot">◆</span><span>A Rivers State for all Rivers people</span><span class="dot">◆</span><span>Renewed Hope</span><span class="dot">◆</span><span>A Better Rivers State</span><span class="dot">◆</span><img class="ticker-apc" src="assets/apc-logo.webp" alt="">
       </div>
     </div>
   </div>
@@ -296,23 +300,9 @@
     </section>
     <section class="section wrap" id="chat">
       <div class="section-head"><div><div class="kicker">Talk with the Deputy Speaker</div><h2>Ask. Listen. Follow up.</h2></div><p>Type a question, choose a language, or try voice input where your browser supports it. Automated answers are not personal messages from the Deputy Speaker; questions can be sent securely to the campaign team.</p></div>
-      <section class="personas" aria-labelledby="personas-title">
-        <h3 id="personas-title">What does it mean for me?</h3>
-        <p>Pick who you are to start a question in the chat.</p>
-        <div class="persona-list">
-          <button type="button" data-persona="business owner">Business owner</button>
-          <button type="button" data-persona="young person">Young person</button>
-          <button type="button" data-persona="parent">Parent</button>
-          <button type="button" data-persona="diaspora member">Diaspora</button>
-          <button type="button" data-persona="professional">Professional</button>
-          <button type="button" data-persona="farmer or fisher">Farmer or fisher</button>
-          <button type="button" data-persona="traditional ruler or community leader">Traditional ruler or leader</button>
-          <button type="button" data-persona="riverine community member">Riverine community</button>
-        </div>
-      </section>
       <div class="conversation">
         <section class="chat" aria-label="Ask Dumle Maol chat">
-          <div class="chat-head"><span class="avatar"><img src="assets/dumle-maol.jfif" alt=""></span><span><b>Ask Dumle Maol</b><small>Automated community information assistant</small></span><span class="online" id="service-status">● Connecting</span></div>
+          <div class="chat-head"><span class="avatar"><img src="assets/dumle-maol.jfif" alt=""></span><span><b>Ask Dumle Maol</b><small>Get answers about the Deputy Speaker</small></span><span class="online" id="service-status" aria-label="Website is live">● Live</span></div>
           <p class="service-note" id="chat-status" role="status" aria-live="polite"></p>
           <div class="feed" id="feed" aria-live="polite" aria-label="Conversation">
             <div class="message bot"><span class="avatar"><img src="assets/dumle-maol.jfif" alt=""></span><div class="bubble">Welcome. What would you like to ask about Gokana or Rivers State?</div></div>
@@ -340,11 +330,20 @@
             <p>English, Nigerian Pidgin, Gokana, Khana, Eleme, Igbo and Hausa are planned. Native review is required before publishing translated political or public-service information.</p>
             <div class="languages"><span>English</span><span>Pidgin</span><span>Gokana</span><span>Khana</span><span>Eleme</span><span>Igbo</span><span>Hausa</span></div>
           </article>
-          <article class="card record" id="record">
-            <div class="kicker">Public record</div><h3>Deputy Speaker, Rivers State</h3>
-            <dl><dt>Constituency</dt><dd>Gokana</dd><dt>Office</dt><dd>Deputy Speaker</dd><dt>Assembly term</dt><dd>2023-2027</dd></dl>
-            <div class="record-links"><a href="https://hoa.rv.gov.ng/deputy-speaker.html" target="_blank" rel="noopener">Rivers State House of Assembly profile ↗</a></div>
-          </article>
+          <section class="personas" aria-labelledby="personas-title">
+            <h3 id="personas-title">What does it mean for me?</h3>
+            <p>Pick who you are to start a question in the chat.</p>
+            <div class="persona-list">
+              <button type="button" data-persona="business owner">Business owner</button>
+              <button type="button" data-persona="young person">Young person</button>
+              <button type="button" data-persona="parent">Parent</button>
+              <button type="button" data-persona="diaspora member">Diaspora</button>
+              <button type="button" data-persona="professional">Professional</button>
+              <button type="button" data-persona="farmer or fisher">Farmer or fisher</button>
+              <button type="button" data-persona="traditional ruler or community leader">Traditional ruler or leader</button>
+              <button type="button" data-persona="riverine community member">Riverine community</button>
+            </div>
+          </section>
         </div>
       </div>
       <section class="follow-up" aria-labelledby="follow-up-title">
@@ -368,6 +367,16 @@
           <p class="privacy-copy">Your message, optional contact details, website and LGA are stored in the campaign's private admin system so the team can follow up. Please do not send passwords or sensitive personal information.</p>
         </form>
       </section>
+    </section>
+    <section class="section wrap" id="record" aria-labelledby="record-title">
+      <article class="card record record-feature">
+        <figure class="record-photo"><img src="assets/dumle-maol.jfif" alt="Rt. Hon. Dumle Maol"></figure>
+        <div class="record-copy">
+          <div class="kicker">Public record</div><h2 id="record-title">Deputy Speaker, Rivers State</h2>
+          <dl><dt>Constituency</dt><dd>Gokana</dd><dt>Office</dt><dd>Deputy Speaker</dd><dt>Assembly term</dt><dd>2023-2027</dd></dl>
+          <div class="record-links"><a href="https://hoa.rv.gov.ng/deputy-speaker.html" target="_blank" rel="noopener">Rivers State House of Assembly profile ↗</a></div>
+        </div>
+      </article>
     </section>
     <section class="section wrap">
       <div class="section-head"><div><div class="kicker">Community priorities</div><h2>A better Rivers starts here</h2></div><p>Strong communities grow when people can move safely, learn new skills and build local businesses.</p></div>
@@ -453,8 +462,13 @@
       fetch("/api/health",{cache:"no-store"}).then(function(response){if(!response.ok)throw new Error("Offline");return response.json()}).then(function(data){
         if(!data.ok)throw new Error("Offline");
         serviceStatus.textContent="● Live";
-        serviceStatus.setAttribute("aria-label","Campaign service is live");
-      }).catch(function(){serviceStatus.textContent="● Offline";serviceStatus.setAttribute("aria-label","Campaign service is currently unavailable")});
+        serviceStatus.setAttribute("aria-label","Website and campaign services are live");
+        chatStatus.textContent="";
+      }).catch(function(){
+        serviceStatus.textContent="● Live";
+        serviceStatus.setAttribute("aria-label","Website is live; campaign services are unavailable");
+        chatStatus.textContent="The website is live, but campaign messaging and follow-up services are unavailable right now.";
+      });
       function avatar(){
         var image=document.createElement("img");image.src="assets/dumle-maol.jfif";image.alt="";
         var wrapper=document.createElement("span");wrapper.className="avatar";wrapper.appendChild(image);return wrapper;
@@ -481,7 +495,11 @@
         var position=0;
         function step(){
           position=Math.min(position+1,text.length);target.textContent=text.slice(0,position);feed.scrollTop=feed.scrollHeight;
-          if(position<text.length){var pause=/[,.!?]/.test(text.charAt(position-1))?180:38;window.setTimeout(step,pause)}
+          if(position<text.length){
+            var character=text.charAt(position-1);
+            var pause=/[.!?]/.test(character)?480:/[,;:]/.test(character)?300:character===" "?105:75+Math.random()*55;
+            window.setTimeout(step,pause);
+          }
           else done();
         }
         step();
