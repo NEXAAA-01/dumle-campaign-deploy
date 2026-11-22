@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Campaign Desk · Ask Dumle Maol</title>
+  <link rel="stylesheet" href="admin.css">
+  <script defer src="admin.js"></script>
+</head>
+<body data-demo="false">
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="Campaign Desk home">
+      <span class="brand-mark">DM</span>
+      <span><strong>Campaign Desk</strong><small>ASK DUMLE MAOL</small></span>
+    </a>
+    <div class="top-actions">
+      <span class="secure"><i></i> Secure workspace</span>
+      <span id="adminName" class="admin-name" hidden></span>
+      <button id="logoutButton" class="button button-outline" type="button" hidden>Sign out</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="loginView" class="login-layout" aria-labelledby="loginTitle">
+      <div class="login-story">
+        <p class="eyebrow">RIVERS STATE · CAMPAIGN OPERATIONS</p>
+        <h1>One desk.<br><span>Every voice.</span></h1>
+        <p class="story-copy">A private workspace for community questions, campaign videos and conversations for the Dumle Maol campaign.</p>
+        <div class="story-points">
+          <div><span class="point-icon">01</span><span>Review incoming messages and follow up with communities.</span></div>
+          <div><span class="point-icon">02</span><span>Manage video submissions with private, staff-only access.</span></div>
+          <div><span class="point-icon">03</span><span>Understand the questions people are asking.</span></div>
+        </div>
+        <span class="story-foot">BUILT FOR ALL 23 LOCAL GOVERNMENT AREAS</span>
+      </div>
+      <div class="login-card">
+        <span class="card-kicker">STAFF ACCESS</span>
+        <h2 id="loginTitle">Welcome back</h2>
+        <p class="muted">Sign in with your campaign administrator email and password.</p>
+        <form id="loginForm">
+          <label for="username">Email address</label>
+          <input id="username" name="username" type="email" autocomplete="username" required maxlength="254" placeholder="you@example.com">
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" required maxlength="128" placeholder="Your campaign account password">
+          <p id="loginError" class="notice notice-error" role="alert" hidden></p>
+          <button class="button button-primary button-wide" type="submit">Sign in <span aria-hidden="true">→</span></button>
+        </form>
+        <button id="demoButton" class="button button-outline button-wide demo-button" type="button" hidden>Explore the sample dashboard</button>
+        <p class="privacy-note"><span aria-hidden="true">◆</span> Admin access is private. Never share your password.</p>
+      </div>
+    </section>
+
+    <section id="dashboardView" class="dashboard" aria-labelledby="dashboardTitle" hidden>
+      <nav class="tabs" aria-label="Dashboard sections">
+        <button class="tab active" data-type="questions" type="button">Inbox <span id="questionBadge" class="tab-count">0</span></button>
+        <button class="tab" data-type="videos" type="button">Videos <span id="videoBadge" class="tab-count">0</span></button>
+        <button class="tab" data-type="chat" type="button">Chat logs</button>
+      </nav>
+
+      <div class="dashboard-content">
+        <div class="page-heading">
+          <div>
+            <p class="eyebrow">COMMUNITY PULSE <span class="live-dot"></span></p>
+            <h1 id="dashboardTitle">Good evening<span id="greetingName"></span></h1>
+            <p class="muted">A clear view of what Rivers people are asking for.</p>
+          </div>
+          <button id="exportButton" class="button button-outline" type="button"><span aria-hidden="true">↓</span> Export CSV</button>
+        </div>
+
+        <div class="stats-grid" aria-label="Campaign activity">
+          <article class="stat-card"><span class="stat-label">Community questions</span><strong id="statQuestions">—</strong><span id="statNewQuestions" class="stat-foot">New messages</span><span class="stat-icon">Q</span></article>
+          <article class="stat-card"><span class="stat-label">Community videos</span><strong id="statVideos">—</strong><span id="statNewVideos" class="stat-foot">New submissions</span><span class="stat-icon">▶</span></article>
+          <article class="stat-card"><span class="stat-label">Chat exchanges</span><strong id="statChats">—</strong><span id="statSessions" class="stat-foot">Unique visitors · 7 days</span><span class="stat-icon">↗</span></article>
+        </div>
+
+        <section class="inbox-card" aria-labelledby="inboxTitle">
+          <div class="inbox-heading">
+            <div><p class="eyebrow">YOUR WORKSPACE</p><h2 id="inboxTitle">Community inbox</h2></div>
+            <span id="recordCount" class="record-count">Loading…</span>
+          </div>
+          <div class="filters">
+            <label class="search-wrap"><span aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="Search messages, LGA, name…" autocomplete="off"></label>
+            <label class="status-filter"><span class="sr-only">Filter by status</span><select id="statusFilter"><option value="">All statuses</option><option value="new">New</option><option value="in_progress">In progress</option><option value="resolved">Resolved</option><option value="spam">Spam</option></select></label>
+          </div>
+          <p id="dashboardError" class="notice notice-error" role="alert" hidden></p>
+          <div class="table-wrap">
+            <table>
+              <thead id="tableHead"></thead>
+              <tbody id="recordRows"></tbody>
+            </table>
+            <div id="emptyState" class="empty-state" hidden><span>✳</span><strong>Nothing here just yet</strong><p>New messages will appear in this space.</p></div>
+          </div>
+          <div class="pagination"><span id="pageLabel">Showing recent records</span><button id="nextPage" class="button button-small button-outline" type="button">Older records →</button></div>
+        </section>
+
+        <p class="dashboard-foot">Private campaign information · Use only on a trusted device · <a href="../">Open the public microsite ↗</a></p>
+      </div>
+    </section>
+  </main>
+  <aside id="detailPanel" class="detail-panel" aria-live="polite" hidden>
+    <button id="closeDetail" class="detail-close" type="button" aria-label="Close details">×</button>
+    <div id="detailContent"></div>
+  </aside>
+</body>
+</html>

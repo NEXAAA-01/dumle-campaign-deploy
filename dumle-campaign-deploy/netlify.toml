@@ -1,0 +1,44 @@
+[build]
+  publish = "public"
+  functions = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[functions]
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/api/health"
+  to = "/.netlify/functions/health"
+  status = 200
+
+[[redirects]]
+  from = "/api/token.php"
+  to = "/.netlify/functions/token"
+  status = 200
+
+[[redirects]]
+  from = "/api/question.php"
+  to = "/.netlify/functions/question"
+  status = 200
+
+[[redirects]]
+  from = "/api/chat.php"
+  to = "/.netlify/functions/chat"
+  status = 200
+
+[[redirects]]
+  from = "/api/video.php"
+  to = "/.netlify/functions/video"
+  status = 200
+
+[[redirects]]
+  from = "/api/admin.php"
+  to = "/.netlify/functions/admin"
+  status = 200
+
+[[redirects]]
+  from = "/admin"
+  to = "/admin/"
+  status = 301
