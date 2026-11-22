@@ -329,20 +329,20 @@
           <form class="compose" id="ask-form">
             <label class="sr" for="language">Choose a language</label>
             <select id="language" aria-label="Choose a response language">
-              <option value="English">English</option><option value="Pidgin">Nigerian Pidgin</option><option value="Gokana">Gokana</option><option value="Khana">Khana</option><option value="Eleme">Eleme</option><option value="Igbo">Igbo</option><option value="Hausa">Hausa</option>
+              <option value="English">English</option><option value="Pidgin">Nigerian Pidgin</option><option value="Igbo">Igbo</option><option value="Hausa">Hausa</option><option value="Yoruba">Yoruba</option><option value="Gokana">Gokana (review pending)</option><option value="Khana">Khana (review pending)</option><option value="Eleme">Eleme (review pending)</option>
             </select>
             <button class="button voice" id="voice" type="button" title="Use voice input">🎙 Voice</button>
             <label class="sr" for="question">Type your question</label>
             <textarea id="question" maxlength="600" placeholder="Type your question..." required></textarea>
             <button class="button" type="submit">Send</button>
           </form>
-          <div class="chat-foot">Voice recognition depends on browser and language support. You can always type your question.</div>
+          <div class="chat-foot">For voice input, choose your language first. Browser support varies; you can always type your question.</div>
         </section>
         <div class="side-stack">
           <article class="card">
             <div class="kicker">Language access</div><h3>Speak in your own words</h3>
-            <p>English, Nigerian Pidgin, Gokana, Khana, Eleme, Igbo and Hausa are planned. Native review is required before publishing translated political or public-service information.</p>
-            <div class="languages"><span>English</span><span>Pidgin</span><span>Gokana</span><span>Khana</span><span>Eleme</span><span>Igbo</span><span>Hausa</span></div>
+            <p>Chat replies are available in English, Nigerian Pidgin, Igbo, Hausa and Yoruba. Choose your language before voice input. Igbo, Hausa and Yoruba wording can be refined by fluent speakers; Gokana, Khana and Eleme replies are pending native-speaker review.</p>
+            <div class="languages"><span>English</span><span>Pidgin</span><span>Igbo</span><span>Hausa</span><span>Yoruba</span><span>Gokana (review pending)</span><span>Khana (review pending)</span><span>Eleme (review pending)</span></div>
           </article>
           <section class="personas" aria-labelledby="personas-title">
             <h3 id="personas-title">What does it mean for me?</h3>
@@ -453,6 +453,7 @@
       <div class="nexa-sign"><span>Designed and built by <b>NEXA</b></span><span>QA checked by NEXA | Powered by NEXA</span></div>
     </div>
   </footer>
+  <script src="chat-responses.js"></script>
   <script>
     (function(){
       var feed=document.getElementById("feed"),form=document.getElementById("ask-form"),question=document.getElementById("question"),language=document.getElementById("language");
@@ -492,19 +493,6 @@
         if(who==="bot")row.appendChild(avatar());
         var body=document.createElement("div");body.className="bubble";body.textContent=text;row.appendChild(body);feed.appendChild(row);feed.scrollTop=feed.scrollHeight;return body;
       }
-      function answer(q,lang){
-        var s=q.toLowerCase();
-        var concern=/worry|concern|problem|suffer|struggle|fear|hardship|help|urgent|pain|road|water|light|school|hospital/.test(s);
-        if(lang==="Pidgin"){
-          var warm=concern?"I hear wetin you dey talk, thank you for sharing am. ":"Thank you for your question. Your voice matter. ";
-          if(/who|role|speaker|assembly/.test(s))return warm+"Public records list Rt. Hon. Dumle Maol as Deputy Speaker of Rivers State House of Assembly for Gokana. Check the official Assembly profile for latest information.";
-          return warm+"This website assistant no be personal message from the Deputy Speaker. I no get verified project or manifesto details to confirm yet. Use the form below if you want the campaign team to follow up.";
-        }
-        var opening=concern?"I hear the concern in your question. Thank you for sharing it. ":"Thank you for reaching out. Your question matters. ";
-        if(/who|role|speaker|assembly/.test(s))return opening+"Public records list Rt. Hon. Dumle Maol as Deputy Speaker of the Rivers State House of Assembly for Gokana. See the official Assembly profile for the public record.";
-        if(/done|achievement|project|gokana|manifesto|agenda|record|bill|vote|legislat/.test(s))return opening+"This site does not yet have a verified manifesto or itemized project record to confirm. Please use the form below to ask the campaign team for a follow-up.";
-        return opening+"This is an automated site assistant, not a personal message from the Deputy Speaker. For a question that needs a direct follow-up, use the campaign form below.";
-      }
       function typeReply(target,text,done){
         var position=0;
         function step(){
@@ -526,8 +514,7 @@
         chatStatus.textContent="";
         var typing=bubble("","bot");typing.innerHTML='<span class="typing" aria-label="Typing"><i></i><i></i><i></i></span>';
         window.setTimeout(function(){
-          var lang=language.value,reply=answer(text,lang);
-          if(!["English","Pidgin"].includes(lang))reply="Language check: "+lang+" needs a fluent-speaker review before an accurate answer can be provided. "+reply;
+          var lang=DumleChatResponses.detectLanguage(text,language.value),reply=DumleChatResponses.answer(text,lang);
           typeReply(typing,reply,function(){
             isTyping=false;
             postApi("/api/chat.php",{session:sessionId,question:text,answer:reply,sources:"Automated site response",channel:"text"}).catch(function(){
@@ -601,12 +588,12 @@
       document.getElementById("voice").addEventListener("click",function(){
         var SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
         if(!SpeechRecognition){window.alert("Voice input is not supported in this browser. You can type your question instead.");return}
-        var lang=language.value,codes={English:"en-NG",Pidgin:"en-NG",Igbo:"ig-NG",Hausa:"ha-NG"};
-        if(!codes[lang]){window.alert("Voice recognition for "+lang+" is not configured in this browser. Please type your question.");return}
+        var lang=language.value,codes={English:"en-NG",Pidgin:"en-NG",Igbo:"ig-NG",Hausa:"ha-NG",Yoruba:"yo-NG"};
+        if(!codes[lang]){chatStatus.textContent=lang+" voice replies are pending fluent-speaker review. Choose English, Pidgin, Igbo, Hausa or Yoruba for now.";return}
         var recognition=new SpeechRecognition();recognition.lang=codes[lang];recognition.interimResults=false;
-        recognition.onresult=function(event){question.value=event.results[0][0].transcript;question.focus()};
-        recognition.onerror=function(){window.alert("Voice input stopped. Please try again or type your question.")};
-        try{recognition.start()}catch(error){window.alert("Could not start voice input. Please type your question instead.")}
+        recognition.onresult=function(event){question.value=event.results[0][0].transcript;question.focus();chatStatus.textContent="Voice input ready. Review your question, then press Send."};
+        recognition.onerror=function(event){chatStatus.textContent=event&&event.error==="language-not-supported"?"This browser does not support voice input in "+lang+". Please type your question; replies can still use "+lang+".":"Voice input stopped. Please try again or type your question."};
+        try{recognition.start()}catch(error){chatStatus.textContent="Could not start voice input. Please type your question instead."}
       });
     })();
   </script>
